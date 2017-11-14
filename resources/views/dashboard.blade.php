@@ -365,7 +365,6 @@
                             <th class="text-center">User Account</th>
                             <th class="text-center">Rank</th>
                             <th class="text-center"></th>
-                            <th class="text-center"></th>
                         </tr>
                         @if(count($users)>0)
                             @foreach($users as $user)
@@ -379,14 +378,18 @@
                                              @if(Auth::user()->id != $user->id)
                                             </div>
                                         {{Form::submit('Update', ['class' => 'btn btn-primary submitbutton col-md-3'])}}
-                                        @endif
+                                             @endif
                                          {!! Form::close() !!}
-                                            
                                     </td>
                                     <td class="text-center">
-                                       
+                                        @if(Auth::user()->id != $user->id)
+                                         {!!Form::open(['action'=>'DashboardController@deleteUser', 'method' => 'POST', 'class' => 'pull-left'])!!}
+                                                    {{Form::hidden('_method', 'DELETE')}}
+                                                    {{Form::hidden('id', $user->id)}}
+                                                    {{Form::submit('Delete', ['class'=>'btn btn-danger'])}}
+                                                {!!Form::close()!!}
+                                        @endif
                                     </td>
-                                    <td class="text-center"></td>
                                 </tr>
                             @endforeach
                         @else

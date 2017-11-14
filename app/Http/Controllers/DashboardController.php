@@ -118,9 +118,9 @@ class DashboardController extends Controller
 
     public function deleteUser(Request $request)
     {
+        dd($request);
         $user = User::find($request->id);
-        $user->accesslevel = $request->level;
-        $user->save;
+        $user->delete();
 
         return redirect('/dashboard')->with('success', 'User deleted!');
     }
