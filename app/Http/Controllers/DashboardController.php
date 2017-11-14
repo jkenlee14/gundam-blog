@@ -118,7 +118,7 @@ class DashboardController extends Controller
 
     public function deleteUser(Request $request)
     {
-        dd($request);
+        // dd($request);
         $user = User::find($request->id);
         $user->delete();
 

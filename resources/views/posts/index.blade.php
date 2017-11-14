@@ -27,7 +27,9 @@
 						</div>
 					</div>
 				@endforeach
-				{{$posts->links()}}
+				<div class="text-center">
+					{{$posts->links()}}
+				</div>
 			@else
 				<p>No posts found</p>
 			@endif
