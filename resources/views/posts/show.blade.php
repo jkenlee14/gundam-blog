@@ -39,7 +39,7 @@
 			<br>
 			<hr>
 			@if (!Auth::guest())
-				@if (Auth::user()->id == $post->user_id)
+				@if ((Auth::user()->id == $post->user_id) or (Auth::user()->accesslevel == 1))
 					<a class="btn btn-default pull-left" href="/posts/{{$post->id}}/edit">Edit</a>
 					<!-- Trigger the modal with a button -->
 					<button type="button" class="btn btn-danger pull-left" data-toggle="modal" data-target="#DeletePost">Delete</button>

@@ -28,9 +28,15 @@ class DashboardController extends Controller
     {
         $tags = Tag::all();
         $categories = Category::all();
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
-        return view('dashboard')->with('posts', $user->posts)->with('categories', $categories)->with('tags', $tags);
+        if (auth()->user()->accesslevel == 1) {
+            $posts = Post::all();
+        } else{
+            $user_id = auth()->user()->id;
+            $user = User::find($user_id);
+            $posts = $user->posts;
+        }
+        return view('dashboard')->with('posts', $posts)->with('categories', $categories)->with('tags', $tags);
+        
     }
 
     public function storeCategory(Request $request)

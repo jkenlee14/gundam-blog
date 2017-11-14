@@ -122,10 +122,12 @@ class PostsController extends Controller
         // dd($tag_selected);
         $post = Post::find($id);
         //Check for correct user
-        if (auth()->user()->id!==$post->user_id) {
+        if ((auth()->user()->id==$post->user_id) or (auth()->user()->accesslevel == 1)) {
+            return view('posts.edit')->with('post', $post)->with('category_list', $category_list)->with('tag_list', $tag_list)->with('tag_selected', $tag_selected);
+        } else{
             return redirect('posts')->with('error', 'You do not have permission to do this action!');
         }
-        return view('posts.edit')->with('post', $post)->with('category_list', $category_list)->with('tag_list', $tag_list)->with('tag_selected', $tag_selected);
+        
     }
 
     /**
@@ -191,14 +193,16 @@ class PostsController extends Controller
         $post = Post::find($id);
         $post->tags()->detach();
         //Check for correct user
-        if (auth()->user()->id!==$post->user_id) {
-            return redirect('posts')->with('error', 'You do not have permission to do this action!');
-        }
-        if ($post->cover_image!='noimage.svg') {
+        if ((auth()->user()->id==$post->user_id) or (auth()->user()->accesslevel == 1)) {
+            if ($post->cover_image!='noimage.svg') {
             //Delete the image
            unlink(public_path('assets/images/' . $post->cover_image));
+             }
+              $post->delete();
+              return redirect('/posts')->with('success', 'Post Deleted!');
+        } else{
+            return redirect('posts')->with('error', 'You do not have permission to do this action!');
         }
-        $post->delete();
-        return redirect('/posts')->with('success', 'Post Deleted!');
+       
     }
 }

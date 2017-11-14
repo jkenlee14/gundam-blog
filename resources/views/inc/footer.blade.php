@@ -25,7 +25,7 @@
                     <ul>
                         {{-- <li><a href="adminlogin.php">Staff Login</a></li> --}}
                         <li><a href="{{ route('login') }}">Login</a></li>
-                        <li><a href="{{ route('register') }}">Register</a></li>
+                        {{-- <li><a href="{{ route('register') }}">Register</a></li> --}}
                         <li><a href="#">Help desk</a></li>
                         <li><a href="#">Forums</a></li>
                     </ul>
