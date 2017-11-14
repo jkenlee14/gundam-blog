@@ -56,6 +56,12 @@ Route::delete('/dashboard/tags', 'DashboardController@deleteTag');
 
 route::get('/tags/{id}', 'TagsController@show');
 
+route::any('/archive/', 'PagesController@archive');
+
+route::any('/dashboard/users', 'DashboardController@indexUser');
+
+route::post('/dashboard/users', 'DashboardController@updateUser');
+
 
 
 

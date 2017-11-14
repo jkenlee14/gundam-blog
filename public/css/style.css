@@ -64,6 +64,9 @@ main {
     margin: 0 auto;
 }
 
+.archivemargin{
+    margin-top: 70px;
+}
 
 
 .comments{
@@ -296,3 +299,11 @@ color: white;
 }
 
 /*/links*/
+
+.postcounter{
+    color:lightgray;
+}
+
+.darkgray{
+    color:darkgray;
+}

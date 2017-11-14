@@ -3,7 +3,12 @@
 @section('content')
 <div class="container-fluid postbody">
 	<div class="col-md-10 col-md-offset-1">
-	<h3>Posts Under Tag: {{$tagname->name}}</h3> <h4 class="graylink">{{count($tagname->posts)}} Posts</h4>
+	<h3>Posts Under Tag: <span class="darkgray">{{$tagname->name}}</span></h3> <h4 class="postcounter">{{count($tagname->posts)}} 
+	@if(count($tagname->posts)==1)
+	Post
+	@else
+	Posts
+	@endif</h4>
 		@if(count($tagposts)>0)
 			@foreach($tagposts as $tagpost)
 				<div class="well categorywell">

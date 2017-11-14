@@ -20,15 +20,15 @@
                 <div id="postlist" class="tab-pane fade in active"> {{-- postlist tab --}}
                     <table class="table table-striped table-bordered">
                         <tr>
-                            <th>Post Title</th>
-                            <th></th>
-                            <th></th>
+                            <th class="text-center">Post Title</th>
+                            <th class="text-center"></th>
+                            <th class="text-center"></th>
                         </tr>
                         @if (count($posts)>0)
                             @foreach ($posts as $post)
                                 <tr>
-                                    <td><a href="posts\{{$post->id}}">{{$post->title}}</a></td>
-                                    <td class="text-center"><a class="btn btn-default" href="/posts/{{$post->id}}/edit">Edit</a></td>
+                                    <td class="text-center"><a href="posts\{{$post->id}}">{{$post->title}}</a></td>
+                                    <td class="text-center"><a class="btn btn-info" href="/posts/{{$post->id}}/edit">Edit</a></td>
                                     <td class="text-center">
                                     <!-- Trigger the modal with a button -->
                                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeletePost{{$post->id}}">Delete</button>
@@ -66,9 +66,9 @@
                 <div id="categories" class="tab-pane fade">
                     <table class="table table-striped table-bordered">
                         <tr>
-                            <th>Category</th>
-                            <th></th>
-                            <th></th>
+                            <th class="text-center">Category</th>
+                            <th class="text-center"></th>
+                            <th class="text-center"></th>
                         </tr>
                             @if(count($categories)>0)
                                 @foreach($categories as $category)
@@ -175,9 +175,9 @@
                 <div id="tags" class="tab-pane fade">
                    <table class="table table-striped table-bordered">
                         <tr>
-                            <th>Tags</th>
-                            <th></th>
-                            <th></th>
+                            <th class="text-center">Tags</th>
+                            <th class="text-center"></th>
+                            <th class="text-center"></th>
                         </tr>
                         @if(count($tags)>0)
                             @foreach($tags as $tag)
@@ -360,12 +360,25 @@
                 </div>
 
                 <div id="accounts" class="tab-pane fade">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <table class="table table-striped table-bordered">
+                        <tr>
+                            <th class="text-center">User Account</th>
+                            <th class="text-center">Rank</th>
+                            <th class="text-center"></th>
+                            <th class="text-center"></th>
+                        </tr>
+                        @if(count($users)>0)
+                            @foreach($users as $user)
+                                <tr>
+                                    <td class="text-center">{{$user->name}}</td>
+                                    <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <p>No users! How can you even see this?</p>
+                        @endif
                 </div>
 
         </div>{{-- end of tab content --}}

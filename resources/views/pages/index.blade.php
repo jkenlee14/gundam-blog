@@ -48,13 +48,17 @@
 						</div>
 					</div> {{-- end of carousel --}}
 					<div class="col-md-3">
-						<div class="well margintop">
+						<div class="well archivemargin">
 							<h3>Archives</h3>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-							cillum dolore eu fugiat nulla pariatur.
+							<ol class="list-unstyled">
+								@if(count($archives)>0)
+									@foreach($archives as $archive)
+										<li><a href="/archive/?month={{$archive['month']}}&year={{$archive['year']}}">{{$archive['month'].' '.$archive['year']. ' (' .$archive['published'].')'}}</a></li>
+									@endforeach
+								@else
+									<li>No Posts!</li>
+								@endif
+							</ol>
 						</div>
 					</div>
 					<div class="col-md-9">

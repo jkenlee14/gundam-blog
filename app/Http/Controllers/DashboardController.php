@@ -26,6 +26,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $users = User::all();
         $tags = Tag::all();
         $categories = Category::all();
         if (auth()->user()->accesslevel == 1) {
@@ -35,7 +36,7 @@ class DashboardController extends Controller
             $user = User::find($user_id);
             $posts = $user->posts;
         }
-        return view('dashboard')->with('posts', $posts)->with('categories', $categories)->with('tags', $tags);
+        return view('dashboard')->with('posts', $posts)->with('categories', $categories)->with('tags', $tags)->with('users', $users);
         
     }
 
@@ -100,5 +101,19 @@ class DashboardController extends Controller
         $tag->posts()->detach();
         $tag->delete();
         return redirect('/dashboard')->with('success', 'Tag deleted!');
+    }
+
+    public function indexUser()
+    {
+         return redirect('/')->with('error', 'Access denied');
+    }
+
+    public function updateUser(Request $request)
+    {
+        $user = User::find($request->id);
+        $user->accesslevel = $request->level;
+        $user->save;
+
+        return redirect('/dashboard')->with('success', 'User access level changed!');
     }
 }

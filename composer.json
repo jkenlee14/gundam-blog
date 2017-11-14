@@ -10,8 +10,10 @@
         "fideloper/proxy": "~3.3",
         "intervention/image": "^2.4",
         "laravel/framework": "5.5.*",
+        "laravel/scout": "^3.0",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.5",
+        "nesbot/carbon": "^1.22",
         "select2/select2": "^4.0",
         "unisharp/laravel-ckeditor": "^4.6"
     },
