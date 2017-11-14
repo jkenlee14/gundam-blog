@@ -101,7 +101,6 @@ body {
     width: 100%;
 }
 .card .user{
-    border-radius: 50%;
     display: block;
     height: 120px;
     margin: -55px auto 0;
@@ -112,6 +111,8 @@ body {
     background: none repeat scroll 0 0 #FFFFFF;
     border: 4px solid #FFFFFF;
     width: 100%;
+    border-radius: 50%;
+    
 }
 
 .card .content{
