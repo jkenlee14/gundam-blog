@@ -112,8 +112,17 @@ class DashboardController extends Controller
     {
         $user = User::find($request->id);
         $user->accesslevel = $request->level;
-        $user->save;
-
+        $user->save();
         return redirect('/dashboard')->with('success', 'User access level changed!');
     }
+
+    public function deleteUser(Request $request)
+    {
+        $user = User::find($request->id);
+        $user->accesslevel = $request->level;
+        $user->save;
+
+        return redirect('/dashboard')->with('success', 'User deleted!');
+    }
+
 }

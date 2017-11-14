@@ -288,7 +288,7 @@
                     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
                     proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 </div>
-
+@if(Auth::user()->accesslevel == 1)
                 <div id="register" class="tab-pane fade">
             <div class="panel panel-default authpanels">
                 <div class="panel-heading">Register</div>
@@ -371,16 +371,30 @@
                             @foreach($users as $user)
                                 <tr>
                                     <td class="text-center">{{$user->name}}</td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
+                                    <td class="text-center">
+                                         {!! Form::open(['action'=>'DashboardController@updateUser', 'method' => 'POST'], ['class'=>'form-inline']) !!}
+                                            <div class="form-group col-md-9">
+                                                {!!Form::hidden('id', $user->id)!!}
+                                                {!!Form::select('level', [1=>'Admin',2=>'Contributor'], $user->accesslevel, ['class' => 'form-control'])!!}
+                                             @if(Auth::user()->id != $user->id)
+                                            </div>
+                                        {{Form::submit('Update', ['class' => 'btn btn-primary submitbutton col-md-3'])}}
+                                        @endif
+                                         {!! Form::close() !!}
+                                            
+                                    </td>
+                                    <td class="text-center">
+                                       
+                                    </td>
                                     <td class="text-center"></td>
                                 </tr>
                             @endforeach
                         @else
                             <p>No users! How can you even see this?</p>
                         @endif
+                    </table>
                 </div>
-
+                @endif
         </div>{{-- end of tab content --}}
     </div>
 @endsection
