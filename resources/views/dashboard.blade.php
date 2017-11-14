@@ -40,7 +40,7 @@
                                                 <p>Are you sure you want to delete this post?</p>
                                               </div>
                                               <div class="modal-footer">
-                                                {!!Form::open(['action'=>['PostsController@destroy', $post->id], 'method' => 'POST', 'class' => 'pull-left'])!!}
+                                                {!!Form::open(['action'=>'PostsController@destroy', 'method' => 'POST', 'class' => 'pull-left'])!!}
                                                     {{Form::hidden('_method', 'DELETE')}}
                                                     {{Form::submit('Delete', ['class'=>'btn btn-danger'])}}
                                                 {!!Form::close()!!}
@@ -114,7 +114,7 @@
                                                 <p>Are you sure you want to delete this category?</p>
                                               </div>
                                               <div class="modal-footer">
-                                                {!!Form::open(['action'=>['DashboardController@deleteCategory', $post->id], 'method' => 'POST', 'class' => 'pull-left'])!!}
+                                                {!!Form::open(['action'=>'DashboardController@deleteCategory', 'method' => 'POST', 'class' => 'pull-left'])!!}
                                                     {{Form::hidden('_method', 'DELETE')}}
                                                     {{Form::hidden('id', $category->id)}}
                                                     {{Form::submit('Delete', ['class'=>'btn btn-danger'])}}
