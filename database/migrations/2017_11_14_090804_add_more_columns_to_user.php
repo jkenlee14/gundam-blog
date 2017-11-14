@@ -13,13 +13,13 @@ class AddMoreColumnsToUser extends Migration
      */
     public function up()
     {
-        Schema::table('users', function($table){
-            $table->integer('accesslevel');
-            $table->string('bio');
-            $table->string('profpicture');
-            $table->string('socmedfb');
-            $table->string('socmedtwitter');
-            $table->string('socmedother');
+        Schema::table('users', function(Blueprint $table){
+            $table->integer('accesslevel')->default(2);
+            $table->string('bio')->nullable();
+            $table->string('profpicture')->nullable();
+            $table->string('socmedfb')->nullable();
+            $table->string('socmedtwitter')->nullable();
+            $table->string('socmedother')->nullable();
         });
     }
 

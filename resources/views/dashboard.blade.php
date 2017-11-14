@@ -114,7 +114,7 @@
                                                 <p>Are you sure you want to delete this category?</p>
                                               </div>
                                               <div class="modal-footer">
-                                                {!!Form::open(['action'=>['DashboardController@deleteCategory', $post->id], 'method' => 'POST', 'class' => 'pull-left'])!!}
+                                                {!!Form::open(['action'=>['DashboardController@deleteCategory', $category->id], 'method' => 'POST', 'class' => 'pull-left'])!!}
                                                     {{Form::hidden('_method', 'DELETE')}}
                                                     {{Form::hidden('id', $category->id)}}
                                                     {{Form::submit('Delete', ['class'=>'btn btn-danger'])}}
