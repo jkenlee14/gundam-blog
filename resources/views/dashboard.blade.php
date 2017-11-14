@@ -281,12 +281,32 @@
             </div> 
             
             <div id="profile" class="tab-pane fade">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    {!! Form::open(['action'=>'DashboardController@updateProfile', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+                    <div class="form-group">
+                        {{Form::label('bio', 'Bio')}}
+                        {{Form::text('bio', $userprof->bio, ['class'=> 'form-control'])}}
+                    </div>
+                    <div class="form-group">
+                        {{Form::label('socmedfb', 'Facebook')}}
+                        {{Form::text('socmedfb', $userprof->socmedfb, ['class'=> 'form-control'])}}
+                    </div>
+                    <div class="form-group">
+                        {{Form::label('socmedtwitter', 'Twitter')}}
+                        {{Form::text('socmedtwitter', $userprof->socmedtwitter, ['class'=> 'form-control'])}}
+                    </div>
+                    <div class="form-group">
+                        {{Form::label('socmedother', 'Other')}}
+                        {{Form::text('socmedother', $userprof->socmedother, ['class'=> 'form-control'])}}
+                    </div>
+
+                   
+
+                    <div class="form-group">
+                        {{Form::file('profpic')}}
+                    </div>
+                    {{Form::submit('Submit Post', ['class' => 'btn btn-primary submitbutton'])}}
+
+            {!! Form::close() !!}
                 </div>
 @if(Auth::user()->accesslevel == 1)
                 <div id="register" class="tab-pane fade">

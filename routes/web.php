@@ -64,6 +64,10 @@ route::post('/dashboard/users', 'DashboardController@updateUser');
 
 route::delete('/dashboard/users', 'DashboardController@deleteUser');
 
+route::any('/dashboard/profile', 'DashboardController@indexProfile');
+
+route::post('/dashboard/profile', 'DashboardController@updateProfile');
+
 
 
 

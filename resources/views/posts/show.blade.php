@@ -14,9 +14,9 @@
 			<br><br>
 			<img class="image-responsive postimagefull" src="{{asset('assets/images/' . $post->cover_image)}}">
 			<br><br>
-			<div class="col-md-10 col-md-offset-1">
+			{{-- <div class="col-md-10 col-md-offset-1"> --}}
 			{!! $post->body !!}
-			</div>
+			{{-- </div> --}}
 			<br>
 			<div class="pull-left">
 				<small>posted by: {{$post->user->name}}</small> &nbsp;
@@ -37,12 +37,13 @@
 			@endif
 			</div>
 			<br>
-			<hr>
+			<br>
 			@if (!Auth::guest())
 				@if ((Auth::user()->id == $post->user_id) or (Auth::user()->accesslevel == 1))
-					<a class="btn btn-default pull-left" href="/posts/{{$post->id}}/edit">Edit</a>
+				<div class="pull-left col-md-12">
+					<a class="btn btn-default" href="/posts/{{$post->id}}/edit">Edit</a>
 					<!-- Trigger the modal with a button -->
-					<button type="button" class="btn btn-danger pull-left" data-toggle="modal" data-target="#DeletePost">Delete</button>
+					<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeletePost">Delete</button>
 					<!-- Modal -->
 					<div id="DeletePost" class="modal fade" role="dialog">
 					  <div class="modal-dialog">
@@ -66,10 +67,11 @@
 					    </div>
 					  </div>
 					</div>
+					</div>
 				@endif
 			@endif
 			<br><br>
-			<div class="comments">
+			<div class="comments col-md-12">
 				
 			<button href="#disqus" data-toggle="collapse" class="btn btn-info btn-large commentbutton backbtn">Expand for comments</button>
 			<div id="disqus" class="collapse">

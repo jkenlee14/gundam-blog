@@ -157,8 +157,10 @@ abbr[title], acronym[title] {
 /*Carousel Content*/
 
 .carousel-inner > .item > img {
-  min-height: 400px;
-  max-height: 400px;
+  /*min-height: 400px;*/
+  /*max-height: 400px;*/
+  min-height: 50vh;
+  max-height: 50vh;
   width: auto;
   margin: 0 auto;
 }

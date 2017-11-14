@@ -7,6 +7,9 @@ Use App\User;
 Use App\Category;
 Use App\Tag;
 Use App\Post;
+Use Auth;
+Use Image;
+
 class DashboardController extends Controller
 {
     /**
@@ -29,6 +32,7 @@ class DashboardController extends Controller
         $users = User::all();
         $tags = Tag::all();
         $categories = Category::all();
+        $userprof = User::find(Auth::user()->id);
         if (auth()->user()->accesslevel == 1) {
             $posts = Post::all();
         } else{
@@ -36,7 +40,7 @@ class DashboardController extends Controller
             $user = User::find($user_id);
             $posts = $user->posts;
         }
-        return view('dashboard')->with('posts', $posts)->with('categories', $categories)->with('tags', $tags)->with('users', $users);
+        return view('dashboard')->with('posts', $posts)->with('categories', $categories)->with('tags', $tags)->with('users', $users)->with('userprof', $userprof);
         
     }
 
@@ -68,6 +72,7 @@ class DashboardController extends Controller
     public function deleteCategory(Request $request)
     {
         $category = Category::find($request->id);
+        $category->categoryposts()->delete();
         $category->delete();
         return redirect('/dashboard')->with('success', 'Category deleted!');
     }
@@ -120,9 +125,62 @@ class DashboardController extends Controller
     {
         // dd($request);
         $user = User::find($request->id);
+        $user->posts()->delete();
         $user->delete();
 
         return redirect('/dashboard')->with('success', 'User deleted!');
+    }
+
+    public function indexProfile()
+    {
+        return redirect('/dashboard')->with('error', 'Access denied');
+    }
+
+    public function updateProfile(Request $request)
+    {
+
+        $this->validate($request,[
+            'bio' => 'required',
+            'profpic' => 'image|nullable|max:1999',
+            'socmedfb' => 'nullable',
+            'socmedtwitter' => 'nullable',
+            'socmedother' => 'nullable'
+        ]);
+
+        //Handle file upload
+        if ($request->hasFile('profpic')) {
+            //Get Filename with extension
+            $fileNameWithExt = $request->file('profpic')->getClientOriginalName();
+            //Get just filename
+            $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            //Get just extension
+            $extension = $request->file('profpic')->getClientOriginalExtension();
+            //Filename to store
+            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+            $image = $request->file('profpic');
+            //Upload Image
+            // $path = $request->file('cover_image')->storeAs('public/cover_images',$fileNameToStore);
+            $location = public_path('assets/images/profiles/' .$fileNameToStore);
+            Image::make($image)->save($location);
+            } else{
+            $fileNameToStore = 'default.png';
+        }
+        $updateuser = User::find(Auth::user()->id);
+        $updateuser->bio = $request->input('bio');
+        $updateuser->socmedfb = $request->input('socmedfb');
+        $updateuser->socmedtwitter = $request->input('socmedtwitter');
+        $updateuser->socmedother = $request->input('socmedother');
+        // if ($request->hasFile('profpic')) {
+        //     if ($updateuser->profpicture!='default.png') {
+        //     //Delete the image
+        //         chmod(public_path('assets/images/profiles/' . $updateuser->profpicture), 0777);
+        //         unlink(public_path('assets/images/profiles/' . $updateuser->profpicture));
+        //     }
+        if ($request->hasfile('profpic')) {
+            $updateuser->profpicture = $fileNameToStore;
+        }
+         $updateuser->save();
+         return redirect('/dashboard')->with('success', 'Profile Updated!');
     }
 
 }

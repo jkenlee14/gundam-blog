@@ -80,7 +80,7 @@ class PostsController extends Controller
             })->save($location);
 
         } else{
-            $fileNameToStore = 'noimage.svg';
+            $fileNameToStore = 'sitelogo.png';
         }
 
         $post = new Post;
@@ -169,7 +169,7 @@ class PostsController extends Controller
         $post->body = $request->input('body');
         $post->category_id = $request->input('category_id');
          if ($request->hasFile('cover_image')) {
-            if ($post->cover_image!='noimage.svg') {
+            if ($post->cover_image!='sitelogo.png') {
             //Delete the image
             // Storage::delete('public/cover_images/' .$post->cover_image);
                 // unlink(public_path('assets/images/' . $post->cover_image));
@@ -194,9 +194,9 @@ class PostsController extends Controller
         $post->tags()->detach();
         //Check for correct user
         if ((auth()->user()->id==$post->user_id) or (auth()->user()->accesslevel == 1)) {
-            if ($post->cover_image!='noimage.svg') {
+            if ($post->cover_image!='sitelogo.png') {
             //Delete the image
-           unlink(public_path('assets/images/' . $post->cover_image));
+           // unlink(public_path('assets/images/' . $post->cover_image));
              }
               $post->delete();
               return redirect('/posts')->with('success', 'Post Deleted!');

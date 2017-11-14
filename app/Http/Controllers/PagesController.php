@@ -15,11 +15,14 @@ class PagesController extends Controller
         $tags = Tag::all();
         $carousels = Post::orderByRaw('RAND()')->take(3)->get();
         $posts = Post::orderBy('created_at', 'desc')->paginate(6);
+        
         return view('pages.index')->with('posts', $posts)->with('carousels', $carousels)->with('tags', $tags)->with('archives', $archives);
     }
 
     public function about(){
-        return view('pages.aboutus');
+        $admins = User::all()->where('accesslevel', 1);
+        $contributors = User::all()->where('accesslevel', 2);
+        return view('pages.aboutus')->with('admins', $admins)->with('contributors', $contributors);
     }
 
     public function archive(){
